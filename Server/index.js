@@ -6,6 +6,8 @@ import morgan from "morgan";
 import dbConnection from "./utils/index.js";
 import { errorHandler, routenotfound } from "./middlewares/errorMiddleware.js";
 import routes from "./routes/index.js";
+import path from "path";
+
 
 
 dotenv.config();
@@ -16,6 +18,8 @@ dbConnection();
  const PORT = process.env.PORT || 5000;
 
  const app = express();
+
+ const _dirname = path.resolve();
  
 
  app.use(cors({
@@ -29,8 +33,18 @@ dbConnection();
  app.use(morgan("dev"));
 
  app.use("/api", routes);
-  app.use(routenotfound);
+  
+ app.use(express.static(path.join(_dirname, "/Client/dist")));
+ app.get("*", (req, res) => {
+        res.sendFile(path.resolve(_dirname, "Client" , "dist" , "index.html"));
+
+ })
+
+ app.use(routenotfound);
  app.use(errorHandler);
+
+
+
 
  app.listen(PORT, () => {
      console.log(`Server is running on port ${PORT}`);
