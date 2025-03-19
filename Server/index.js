@@ -23,7 +23,7 @@ dbConnection();
  
 
  app.use(cors({
-    origin: ["http://localhost:3000" , "http://localhost:3001"],
+    origin: ["http://localhost:3000" , "http://localhost:3001", 'https://full-stack-taskmanager-application-2.onrender.com' , ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
  }));
