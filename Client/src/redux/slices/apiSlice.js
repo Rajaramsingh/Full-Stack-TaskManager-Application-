@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const API_URI = import.meta.env.VITE_APP_BASE_URL;
+// For production, use the Render URL
+const API_URI = import.meta.env.VITE_APP_BASE_URL || 'https://your-render-backend-url.onrender.com';
 
 const baseQuery = fetchBaseQuery({
     baseUrl: `${API_URI}/api`,
@@ -13,6 +14,6 @@ const baseQuery = fetchBaseQuery({
 
 export const apiSlice = createApi({
     baseQuery,
-    tagTypes: ['User', 'Task', 'Notification'],
-    endpoints: (builder) => ({})
-});
+    tagTypes: [],
+    endpoints: (builder) => ({}),
+})
